@@ -20,6 +20,7 @@ const config: GatsbyConfig = {
         path: `${__dirname}/content`,
       },
     },
+    "gatsby-plugin-mdx",
   ],
 };
 

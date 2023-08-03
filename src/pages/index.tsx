@@ -2,27 +2,54 @@ import * as React from "react";
 import { HeadFC, Link, graphql } from "gatsby";
 import Seo from "../components/seo";
 import useSiteMetadata from "../hooks/useSiteMetaData";
-import useRelativePath from "../hooks/useRelativePath";
+import useQueryAllMdx from "../hooks/useQueryAllMdx";
 
-interface PathProps {
-  relativePath: string;
+interface AllMdxProps {
+  frontmatter: {
+    title: string;
+    date: string;
+    slug: string;
+    category: string;
+    tags?: [string?];
+  };
+  id: string;
+  excerpt: string;
+  parent: {
+    id: string;
+    modifiedTime: string;
+  };
 }
 
 const IndexPage = () => {
   const { title } = useSiteMetadata();
-  const path = useRelativePath();
+  const allMdx = useQueryAllMdx();
   return (
-    <div className="w-full h-auto mt-4 flex flex-col  items-center">
+    <div className="w-full h-auto mt-4 flex flex-col items-center">
       <main>
         <Link to="/">
-          <h1 className="text-4xl font-sans text-[#01579B] hover:text-[#0288D1]">
+          <h1 className="text-4xl font-medium font-sans text-[#455A64] hover:text-[#78909C]">
             {title}
           </h1>
         </Link>
       </main>
-      <div>
-        {path.map((node: PathProps) => (
-          <li key={node.relativePath}>{node.relativePath}</li>
+      <div className="flex flex-col items-center">
+        {allMdx.map((node: AllMdxProps) => (
+          <article
+            className="group w-full max-w-[60%] h-auto p-4 my-4 bg-[#CFD8DC]/20 rounded-[4px] shadow-md cursor-pointer"
+            key={node.id}
+          >
+            <Link to="/">
+              <header>
+                <h2 className="font-sans text-2xl text-[#01579B] group-hover:text-[#0288D1]">
+                  {node.frontmatter.title}
+                </h2>
+              </header>
+              <time className="font-serif text-xs">
+                {node.frontmatter.date}
+              </time>
+              <p className="font-serif text-sm mt-2">{node.excerpt}</p>
+            </Link>
+          </article>
         ))}
       </div>
     </div>
