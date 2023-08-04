@@ -38,7 +38,7 @@ const IndexPage = () => {
             className="group w-full max-w-[60%] h-auto p-4 my-4 bg-[#CFD8DC]/20 rounded-[4px] shadow-md cursor-pointer"
             key={node.id}
           >
-            <Link to="/">
+            <Link to={`/blog/${node.frontmatter.slug}`}>
               <header>
                 <h2 className="font-sans text-2xl text-[#01579B] group-hover:text-[#0288D1]">
                   {node.frontmatter.title}

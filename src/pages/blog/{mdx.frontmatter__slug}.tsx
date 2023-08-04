@@ -1,16 +1,41 @@
 import * as React from "react";
 import Seo from "../../components/seo";
-import useQueryAllMdx from "../../hooks/useQueryAllMdx";
 import useSiteMetadata from "../../hooks/useSiteMetaData";
-import { Link } from "gatsby";
+import { Link, graphql } from "gatsby";
+import { ReactNode } from "react";
 
-const Posts = () => {
+interface DataProps {
+  mdx: {
+    frontmatter: {
+      title: string;
+      date: string;
+      category: string;
+      tags: string[];
+    };
+  };
+}
+
+interface PostProps {
+  data: DataProps;
+  children: ReactNode;
+}
+
+interface HeadProps {
+  data: {
+    mdx: {
+      frontmatter: {
+        title: string;
+      };
+    };
+  };
+}
+
+const Posts = ({ data, children }: PostProps) => {
   const { title } = useSiteMetadata();
-  const allMdx = useQueryAllMdx();
 
   return (
     <div className="w-full h-screen p-4 flex justify-center">
-      <div className="w-full max-w-[75%] h-auto mt-4 flex flex-col items-start">
+      <div className="w-full max-w-[50%] h-auto mt-4 flex flex-col items-start">
         <header>
           <h1 className="mb-4">
             <Link to="/">
@@ -19,24 +44,45 @@ const Posts = () => {
               </h1>
             </Link>
           </h1>
-          <h2 className="font-sans text-4xl">{allMdx[0].frontmatter.title}</h2>
-          <time className="font-serif text-sm">
-            {allMdx[0].frontmatter.date}
+          <h2 className="font-sans text-4xl text-[#01579B]">
+            {data.mdx.frontmatter.title}
+          </h2>
+          <time className="font-serif text-sm block mb-2">
+            {data.mdx.frontmatter.date}
           </time>
         </header>
-        <aside className="font-serif text-sm">
-          {allMdx[0].frontmatter.category}
+        <hr className="w-full border-solid border-[0.5px] border-black" />
+        <aside className="font-serif text-md my-2">
+          {`類別：` + data.mdx.frontmatter.category}
           <br />
-          {allMdx[0].frontmatter.tags.map((tag: string) => (
-            <li>{tag}</li>
-          ))}
+          <span className="text-sm">
+            {data.mdx.frontmatter.tags.map((tag: string, index: number) => (
+              <li key={index + tag}>{tag}</li>
+            ))}
+          </span>
         </aside>
-        <main></main>
+        <hr className="w-full border-solid border-[0.5px] border-black" />
+        <main className="mt-4 font-serif text-md">{children}</main>
       </div>
     </div>
   );
 };
 
-export const Head = () => <Seo tag="" />;
+export const query = graphql`
+  query ($id: String) {
+    mdx(id: { eq: $id }) {
+      frontmatter {
+        title
+        date(formatString: "MMMM D, YYYY")
+        category
+        tags
+      }
+    }
+  }
+`;
+
+export const Head = ({ data }: HeadProps) => (
+  <Seo tag={data.mdx.frontmatter.title} />
+);
 
 export default Posts;
