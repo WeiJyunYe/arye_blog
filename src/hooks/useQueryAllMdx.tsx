@@ -22,11 +22,12 @@ const useQueryAllMdx = () => {
             }
           }
         }
+        totalCount
       }
     }
   `);
 
-  return data.allMdx.nodes;
+  return data.allMdx;
 };
 
 export default useQueryAllMdx;
