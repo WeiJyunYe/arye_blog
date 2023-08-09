@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from "react";
-
 const Comments = () => {
   const commentsRef = useRef<HTMLDivElement>(null);
 
@@ -23,7 +22,7 @@ const Comments = () => {
       }
     };
   }, []);
-  return <div ref={commentsRef}></div>;
+  return <div className="w-full h-full" ref={commentsRef}></div>;
 };
 
 export default Comments;

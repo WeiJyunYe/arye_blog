@@ -31,7 +31,7 @@ const IndexPage = () => {
   const allMdx = useQueryAllMdx();
 
   const postsTotalCount = allMdx.totalCount;
-  const postsPerPage = 1;
+  const postsPerPage = 10;
 
   const [itemOffset, setItemOffset] = useState(0);
   const [pageCount, setPageCount] = useState(0);
@@ -78,15 +78,15 @@ const IndexPage = () => {
       </div>
       <ReactPaginate
         containerClassName="flex p-4 mt-2 font-mono text-sm select-none"
-        pageClassName="inline-blocl flex justify-center items-center w-8 h-8 p-2 font-thin hover:text-[#0288D1] hover:bg-[#455A64]/30 hover:cursor-pointer border-y-[1px] border-l-[1px] border-black"
-        pageLinkClassName="block"
+        pageClassName="w-8 h-8 font-thin hover:text-[#0288D1] hover:bg-[#455A64]/30 hover:cursor-pointer border-y-[1px] border-l-[1px] border-black"
+        pageLinkClassName="w-full h-full flex justify-center items-center"
         activeClassName="text-[#01579B] font-bold hover:cursor-not-allowed bg-[#455A64]/10"
         activeLinkClassName="cursor-not-allowed disabled"
-        previousClassName="inline-block flex justify-center items-center w-8 h-8 p-2 hover:text-[#0288D1] hover:bg-[#455A64]/30 hover:cursor-pointer border-y-[1px] border-l-[1px] border-black rounded-l-[2px]"
-        previousLinkClassName="block"
-        nextClassName="inline-block flex justify-center items-center w-8 h-8 p-2 hover:text-[#0288D1] hover:bg-[#455A64]/30 hover:cursor-pointer border-[1px] border-black rounded-r-[2px]"
-        nextLinkClassName="block"
-        breakClassName="inline-blocl flex justify-center items-center w-8 h-8 p-2 border-y-[1px] border-l-[1px] border-black"
+        previousClassName="w-8 h-8 p-2 hover:text-[#0288D1] hover:bg-[#455A64]/30 hover:cursor-pointer border-y-[1px] border-l-[1px] border-black rounded-l-[2px]"
+        previousLinkClassName="w-full h-full flex justify-center items-center"
+        nextClassName="w-8 h-8 p-2 hover:text-[#0288D1] hover:bg-[#455A64]/30 hover:cursor-pointer border-[1px] border-black rounded-r-[2px]"
+        nextLinkClassName="w-full h-full flex justify-center items-center"
+        breakClassName="flex justify-center items-center w-8 h-8 p-2 border-y-[1px] border-l-[1px] border-black"
         breakLinkClassName=""
         breakLabel="..."
         nextLabel=">"
