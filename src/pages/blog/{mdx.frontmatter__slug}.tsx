@@ -3,6 +3,7 @@ import Seo from "../../components/seo";
 import useSiteMetadata from "../../hooks/useSiteMetaData";
 import { Link, graphql } from "gatsby";
 import { ReactNode } from "react";
+import Comments from "../../components/comments";
 
 interface DataProps {
   mdx: {
@@ -63,6 +64,7 @@ const Posts = ({ data, children }: PostProps) => {
         </aside>
         <hr className="w-full border-solid border-[0.5px] border-black" />
         <main className="mt-4 font-serif text-md">{children}</main>
+        <Comments />
       </div>
     </div>
   );
