@@ -10,9 +10,14 @@ tags:
   - CSS Modules
 ---
 
+> [!UPDATE 2023-08-10]
+> 原文做法雖能讓 TypeScript 不會報錯，但經提醒為不嚴謹的做法，在某些情況下會出現非預期的錯誤且使 TypeScript 不會回報
+> 因此，建議改使用[typescript-plugin-css-modules]這個套件(https://www.npmjs.com/package/typescript-plugin-css-modules)
+> 它可以生成 CSS 模組的 TypeScript 定義檔，這樣就能對 CSS 模組進行嚴格的型別檢查。
+
 當你在 TypeScript 專案中使用 CSS Module，可能會出現這個報錯
 
-Cannot find module '.FOLDER_PATH/COMPNENT_NAME.module.css' or its corresponding type declarations.
+`Cannot find module '.FOLDER_PATH/COMPNENT_NAME.module.css' or its corresponding type declarations.`
 
 假如檔案路徑以及檔名都沒有 typo，則很可能與 TypeScript 的型別定義有關，因為 TypeScript 預設情況下並不知道如何處理 CSS 模組。
 
@@ -35,7 +40,7 @@ export default classes;
 }
 ```
 
-指定 types 後存擋
+指定 types 資料夾後存擋
 
 ```json
 {
@@ -43,4 +48,5 @@ export default classes;
 }
 ```
 
-這樣就完成了，有時候可能需要重新啟動 IDE 才會讓新的設定生效
+這樣就完成了，有時候新的設定需要重新啟動 TypeScript Server 才能生效
+（ IDE 的工作區在 ts 檔案時，按下 `cmd + shift + p` ，）
