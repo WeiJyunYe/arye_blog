@@ -63,7 +63,7 @@ const Posts = ({ data, children }: PostProps) => {
           </span>
         </aside>
         <hr className="w-full border-solid border-[0.5px] border-black" />
-        <main className="mt-4 font-serif text-md">{children}</main>
+        <main className="w-full mt-4 font-serif text-md">{children}</main>
         <Comments />
       </div>
     </div>
